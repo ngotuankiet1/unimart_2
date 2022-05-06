@@ -24,8 +24,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::middleware('auth','verified')->group(function () {
-    Route::get('dashboard', 'DashboardController@show');
+Route::middleware('auth', 'verified')->group(function () {
+    Route::get('admin', 'DashboardController@show');
 
     // ==================USERS===========================
     Route::get('admin/user/list', 'AdminUserController@show');
@@ -36,4 +36,11 @@ Route::middleware('auth','verified')->group(function () {
     Route::get('admin/user/action', 'AdminUserController@action');
     Route::post('admin/user/update/{id}', 'AdminUserController@update')->name('user.edit');
     Route::get('admin/user/edit/{id}', 'AdminUserController@edit');
+
+    // ==================PRODUCTS===========================
+    Route::get('admin/product/cat/list', 'AdminProductController@show_cat');
+    Route::post('admin/product/cat/store', 'AdminProductController@store_cat')->name('store.cat');
+    Route::get('admin/product/cat/delete/{id}', 'AdminProductController@delete_cat')->name('delete.product.cat');
+    Route::get('admin/product/cat/edit/{id}', 'AdminProductController@edit_cat');
+    Route::post('admin/product/cat/update/{id}', 'AdminProductController@update_cat')->name('update_product_cat');
 });
