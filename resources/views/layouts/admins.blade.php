@@ -113,7 +113,7 @@
                             <li><a href="{{url('admin/page/list')}}">Danh sách</a></li>
                         </ul>
                     </li>
-                    <li class="nav-link {{$module_active == 'user'?'post':''}}">
+                    <li class="nav-link {{$module_active == 'post'?'active':''}}">
                         <a href="{{url('admin/post/list')}}">
                             <div class="nav-link-icon d-inline-flex">
                                 <i class="far fa-folder"></i>

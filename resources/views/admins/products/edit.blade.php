@@ -34,7 +34,7 @@
                             <div class="form-group">
                                 <label for="name">Ảnh sản phẩm</label>
                                 <input class="form-control-file" type="file" id="file" name="file">
-                                <label for="Ảnh hiện có"></label>
+                                <label for="Ảnh hiện có">Ảnh hiện có</label>
                                 <img width="100px" src="{{ asset($product->images) }}" alt="">
                                 @error('file')
                                     <small class="text-danger">{{ $message }}</small>

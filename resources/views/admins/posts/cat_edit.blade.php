@@ -3,10 +3,10 @@
 <div class="col-8">
     <div class="card">
         <div class="card-header font-weight-bold">
-            Cập nhật sản phẩm
+            Cập nhật danh mục
         </div>
         <div class="card-body">
-            <form action="{{ route('update_product_cat',$cat->id) }}" method="POST">
+            <form action="{{ route('update.post.cat',$cat->id) }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="name">Tên danh mục</label>
