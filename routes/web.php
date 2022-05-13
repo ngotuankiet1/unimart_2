@@ -14,14 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('users/home');
+// });
 
 Auth::routes(['verify' => true]);
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::group(['prefix' => 'laravel-filemanager'], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
@@ -51,7 +51,7 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::post('admin/product/update/{id}', 'AdminProductController@update')->name('product.update');
     #CAT
     Route::get('admin/product/cat/list', 'AdminProductController@show_cat');
-    Route::post('admin/product/cat/store', 'AdminProductController@store_cat')->name('store.cat');
+    Route::post('admin/product/cat/store', 'AdminProductController@store_cat')->name('store.product.cat');
     Route::get('admin/product/cat/delete/{id}', 'AdminProductController@delete_cat')->name('delete.product.cat');
     Route::get('admin/product/cat/edit/{id}', 'AdminProductController@edit_cat');
     Route::post('admin/product/cat/update/{id}', 'AdminProductController@update_cat')->name('update_product_cat');
@@ -81,3 +81,9 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::get('admin/page/edit/{id}', 'AdminPageController@edit')->name('page.edit');
     Route::post('admin/page/update/{id}', 'AdminPageController@update')->name('page.update');
 });
+
+
+#CUSTOMMER
+// cat_product
+
+

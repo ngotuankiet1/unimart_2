@@ -13,7 +13,7 @@
                         Danh mục sản phẩm
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('store.cat') }}" method="POST">
+                        <form action="{{ route('store.product.cat') }}" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label for="name">Tên danh mục</label>
