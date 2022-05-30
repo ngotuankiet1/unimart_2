@@ -66,10 +66,10 @@
                             <option value="0">Chọn danh mục</option>
                             @foreach ($list_cat as $item)
                                 <option
-                                    @if ($product->product_cat == $item->name) @php
+                                    @if ($product->parent_id == $item->id) @php
                                      echo "selected='selected'"
                                  @endphp @endif
-                                    value="{{ $item->name }}">
+                                    value="{{ $item->id }}">
                                     @php
                                         $str = '';
                                         for ($i = 0; $i < $item->lever; $i++) {

@@ -1,8 +1,8 @@
 /*DETAIL PRODUCT*/
 #detail-product-wp .thumb-wp, #detail-product-wp .thumb-respon-wp{ width: 42%;}
 #detail-product-wp .thumb-respon-wp{ border: 1px solid #c7c7c7;}
-#detail-product-wp .info{ 
-    width: 58%; 
+#detail-product-wp .info{
+    width: 58%;
     padding-left: 25px;
 }
 #detail-product-wp .section-detail, #post-product-wp .section-detail{background: #fff; padding: 15px;}
@@ -11,8 +11,8 @@
 #detail-product-wp .owl-carousel .owl-item{ padding: 0px 4px;}
 #detail-product-wp .owl-carousel .owl-item a{ display: block; }
 #detail-product-wp .owl-controls{ position: relative;}
-#detail-product-wp .owl-controls .owl-buttons div{ 
-    position: absolute; 
+#detail-product-wp .owl-controls .owl-buttons div{
+    position: absolute;
     bottom: 42px;
 }
 #detail-product-wp .owl-controls .owl-buttons div.owl-next{ right: 0px;}
@@ -100,3 +100,25 @@
     text-transform: uppercase;
 }
 #post-product-wp .section-detail p{ padding-bottom: 15px; color: #666; text-align: justify;}
+
+.detail-hide{
+    max-height: 150px;
+    overflow: hidden;
+}
+
+.read-more{
+    text-align: center;
+}
+
+.read-more a {
+    display: inline-block;
+    border-radius: 7px;
+    border-color: #006d00;
+    border: 1px solid #e91e63;
+    padding: 5px 10px;
+    color: black;
+}
+
+.read-more a:hover {
+    background-color: #f8f9fa;
+}

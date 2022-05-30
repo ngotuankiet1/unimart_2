@@ -39,7 +39,8 @@ class AdminProductController extends Controller
         $count_admin_active = Products::count();
         $count_admin_trash = Products::onlyTrashed()->count();
         $count = [$count_admin_active, $count_admin_trash];
-        return view('admins.products.list', compact('products', 'count', 'list_act'));
+        $product_cat = Product_cat::get();
+        return view('admins.products.list', compact('products', 'count', 'list_act','product_cat'));
     }
 
     function add()
@@ -99,7 +100,7 @@ class AdminProductController extends Controller
                 'images' => $input['thumnail'],
                 'desc' =>  $request->input('desc'),
                 'intro' =>  $request->input('intro'),
-                'product_cat' =>  $request->input('parent_cat'),
+                'parent_id' =>  $request->input('parent_cat'),
                 'status' =>  $request->input('status'),
                 'outstanding' =>  $request->input('outstanding'),
                 'warehouse' =>  $request->input('warehouse'),
@@ -160,7 +161,7 @@ class AdminProductController extends Controller
             [
                 'name' => 'required|max:255|min:3',
                 'price' => 'required|integer',
-                'file' => 'required|image',
+                // 'file' => 'required|image',
                 'desc' => 'required',
                 'intro' => 'required',
                 'parent_cat' => 'required',
@@ -196,6 +197,9 @@ class AdminProductController extends Controller
             $path = $file->move('public/uploads/', $file->getClientOriginalName());
             $thumnail = 'uploads/' . $file->getClientOriginalName();
             $input['thumnail'] = $thumnail;
+        }else{
+            $path_images = Products::where('id',$id)->pluck('images');
+            $input['thumnail'] = $path_images[0];
         }
 
         Products::find($id)->update(
@@ -205,7 +209,7 @@ class AdminProductController extends Controller
                 'images' => $input['thumnail'],
                 'desc' =>  $request->input('desc'),
                 'intro' =>  $request->input('intro'),
-                'product_cat' =>  $request->input('parent_cat'),
+                'parent_id' =>  $request->input('parent_cat'),
                 'status' =>  $request->input('status'),
                 'outstanding' =>  $request->input('outstanding'),
                 'warehouse' =>  $request->input('warehouse'),

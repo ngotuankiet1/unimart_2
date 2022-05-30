@@ -62,7 +62,7 @@
                         <select class="form-control" name="parent_cat" id="parent_cat">
                             <option value="0">Chọn danh mục</option>
                             @foreach ($list_cat as $cat)
-                                <option value="{{ $cat->name }}">
+                                <option value="{{ $cat->id }}">
                                     @php
                                         $str = '';
                                         for ($i = 0; $i < $cat->lever; $i++) {

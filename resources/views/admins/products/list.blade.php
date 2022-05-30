@@ -73,13 +73,20 @@
                                         <td><img width="80px" src="{{ asset($item->images) }}" alt=""></td>
                                         <td><a href="#">{{ $item->name }}</a></td>
                                         <td>{{ number_format($item->price, 0, ',', ',') }}VNĐ</td>
-                                        <td>{{ $item->product_cat }}</td>
+                                        <td>
+                                            @foreach ($product_cat as $cate)
+                                                @if ($cate->id == $item->parent_id)
+                                                    {{ $cate->name }}
+                                                @endif
+                                            @endforeach
+                                        </td>
                                         <td>{{ $item->created_at }}</td>
                                         <td><span
                                                 class="badge {{ $item->warehouse == 'Còn hàng' ? 'badge-success' : 'badge-danger' }}">{{ $item->warehouse }}</span>
                                         </td>
                                         <td>
-                                            <a href="{{route('product.edit',$item->id)}}" class="btn btn-success btn-sm rounded-0 text-white" type="button"
+                                            <a href="{{ route('product.edit', $item->id) }}"
+                                                class="btn btn-success btn-sm rounded-0 text-white" type="button"
                                                 data-toggle="tooltip" data-placement="top" title="Edit"><i
                                                     class="fa fa-edit"></i></a>
                                             <a href="{{ route('product.delete', $item->id) }}"

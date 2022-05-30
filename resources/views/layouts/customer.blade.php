@@ -13,12 +13,6 @@
     <link href="{{ asset('user/css/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('user/style.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('user/responsive.css') }}" rel="stylesheet" type="text/css" />
-
-    <script src="{{ asset('user/js/jquery-2.2.4.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('user/js/elevatezoom-master/jquery.elevatezoom.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('user/js/bootstrap/bootstrap.min.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('user/js/carousel/owl.carousel.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('user/js/main.js') }}" type="text/javascript"></script>
 </head>
 
 <body>
@@ -31,7 +25,7 @@
                         <div id="main-menu-wp" class="fl-right">
                             <ul id="main-menu" class="clearfix">
                                 <li>
-                                    <a href="{{url('/')}}" title="">Trang chủ</a>
+                                    <a href="{{ url('/') }}" title="">Trang chủ</a>
                                 </li>
                                 <li>
                                     <a href="?page=category_product" title="">Sản phẩm</a>
@@ -45,13 +39,25 @@
                                 <li>
                                     <a href="?page=detail_blog" title="">Liên hệ</a>
                                 </li>
+                                <li>
+                                    @php
+                                        $customer_id = Session::get('customer_id');
+                                    @endphp
+                                    @if ($customer_id != null)
+                                        <a href="{{ route('cart.checkoutLogout') }}" title=""> <i class="fa fa-sign-in"
+                                                aria-hidden="true"></i>Đăng xuất</a>
+                                    @else
+                                        <a href="{{ route('cart.checkoutLogin') }}" title=""> <i class="fa fa-sign-in"
+                                                aria-hidden="true"></i>Đăng nhập</a>
+                                    @endif
+                                </li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div id="head-body" class="clearfix">
                     <div class="wp-inner">
-                        <a href="{{url('/')}}" title="" id="logo" class="fl-left"><img
+                        <a href="{{ url('/') }}" title="" id="logo" class="fl-left"><img
                                 src="public/user/images/logo.png" /></a>
                         <div id="search-wp" class="fl-left">
                             <form method="POST" action="">
@@ -66,46 +72,48 @@
                             </div>
                             <div id="btn-respon" class="fl-right"><i class="fa fa-bars"
                                     aria-hidden="true"></i></div>
-                            <a href="?page=cart" title="giỏ hàng" id="cart-respon-wp" class="fl-right">
+                            <a href="{{ route('cart.show') }}" title="giỏ hàng" id="cart-respon-wp"
+                                class="fl-right">
                                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                                 <span id="num">2</span>
                             </a>
                             <div id="cart-wp" class="fl-right">
-                                <div id="btn-cart">
-                                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                                    <span id="num">2</span>
-                                </div>
+                                <a href="{{ route('cart.show') }}">
+                                    <div style="color: white" id="btn-cart">
+                                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                        <span id="num">{{ Cart::count() }}</span>
+                                    </div>
+                                </a>
+
                                 <div id="dropdown">
-                                    <p class="desc">Có <span>2 sản phẩm</span> trong giỏ hàng</p>
+                                    <p class="desc">Có <span>{{ Cart::count() }} sản phẩm</span> trong giỏ
+                                        hàng</p>
                                     <ul class="list-cart">
-                                        <li class="clearfix">
-                                            <a href="" title="" class="thumb fl-left">
-                                                <img src="public/user/images/img-pro-11.png" alt="">
-                                            </a>
-                                            <div class="info fl-right">
-                                                <a href="" title="" class="product-name">Sony Express X6</a>
-                                                <p class="price">6.250.000đ</p>
-                                                <p class="qty">Số lượng: <span>1</span></p>
-                                            </div>
-                                        </li>
-                                        <li class="clearfix">
-                                            <a href="" title="" class="thumb fl-left">
-                                                <img src="public/user/images/img-pro-23.png" alt="">
-                                            </a>
-                                            <div class="info fl-right">
-                                                <a href="" title="" class="product-name">Laptop Lenovo 10</a>
-                                                <p class="price">16.250.000đ</p>
-                                                <p class="qty">Số lượng: <span>1</span></p>
-                                            </div>
-                                        </li>
+                                        @foreach (Cart::content() as $item)
+                                            <li class="clearfix">
+                                                <a href="" title="" class="thumb fl-left">
+                                                    <img src="{{ asset($item->options->images) }}" alt="">
+                                                </a>
+                                                <div class="info fl-right">
+                                                    <a href="" title="" class="product-name">{{ $item->name }}</a>
+                                                    <p class="price">
+                                                        {{ number_format($item->price, 0, ',', '.') }}đ</p>
+                                                    <p class="qty">Số lượng:
+                                                        <span>{{ $item->qty }}</span>
+                                                    </p>
+                                                </div>
+                                            </li>
+                                        @endforeach
                                     </ul>
                                     <div class="total-price clearfix">
                                         <p class="title fl-left">Tổng:</p>
-                                        <p class="price fl-right">18.500.000đ</p>
+                                        <p class="price fl-right">{{ Cart::total() }}đ</p>
                                     </div>
                                     <div class="action-cart clearfix">
-                                        <a href="?page=cart" title="Giỏ hàng" class="view-cart fl-left">Giỏ hàng</a>
-                                        <a href="?page=checkout" title="Thanh toán" class="checkout fl-right">Thanh
+                                        <a href="{{ route('cart.show') }}" title="Giỏ hàng"
+                                            class="view-cart fl-left">Giỏ hàng</a>
+                                        <a href="{{ route('cart.checkout') }}" title="Thanh toán"
+                                            class="checkout fl-right">Thanh
                                             toán</a>
                                     </div>
                                 </div>
@@ -117,7 +125,6 @@
             <div id="main-content-wp" class="home-page clearfix">
                 <div class="wp-inner">
                     @yield('content')
-                    @yield('sidebar')
                 </div>
             </div>
             <div id="footer-wp">
@@ -232,6 +239,12 @@
         </div>
         <div id="btn-top"><img src="public/user/images/icon-to-top.png" alt="" /></div>
         <div id="fb-root"></div>
+        <script src="{{ asset('user/js/jquery-2.2.4.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('user/js/elevatezoom-master/jquery.elevatezoom.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('user/js/bootstrap/bootstrap.min.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('user/js/carousel/owl.carousel.js') }}" type="text/javascript"></script>
+        <script src="{{ asset('user/js/main.js') }}" type="text/javascript"></script>
+        @yield('js')
         <script>
             (function(d, s, id) {
                 var js, fjs = d.getElementsByTagName(s)[0];
