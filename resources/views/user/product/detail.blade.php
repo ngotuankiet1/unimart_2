@@ -74,7 +74,7 @@
                                 <span class="status">{{ $product->warehouse }}</span>
                             </div>
                             <p class="price">{{ number_format($product->price, 0, 0, '.') }}Đ</p>
-                            <form action="{{ route('cart.add', $product->id) }}" method="post">
+                            <form action="{{ route('cart.add', $product->id) }}">
                                 @csrf
                                 <div id="num-order-wp">
                                     <a title="" id="minus"><i class="fa fa-minus"></i></a>

@@ -86,16 +86,19 @@ Route::middleware('auth', 'verified')->group(function () {
 #USER
 Route::group(['namespace' => 'User'], function () {
     Route::get('danh-muc-san-pham-{id}.html', 'UserProductController@categoty')->name('user.catrgory');
+    Route::get('tim-kiem.html', 'UserProductController@search')->name('user.search');
     Route::get('chi-tiet-san-pham-{id}.html', 'UserProductController@product_detail')->name('user.detail.product');
+
     Route::get('checkout','UserCartController@checkout')->name('cart.checkout');
     Route::get('login','UserCheckoutController@checkoutLogin')->name('cart.checkoutLogin');
     Route::get('logout','UserCheckoutController@checkLogout')->name('cart.checkoutLogout');
     Route::post('customer-add','UserCheckoutController@add_customer')->name('user.add');
+    Route::post('customer-login','UserCheckoutController@store')->name('user.login');
 
 
     Route::group(['prefix' => 'cart'], function () {
         Route::get('/','UserCartController@show')->name('cart.show');
-        Route::post('addCart-{id}','UserCartController@addCart')->name('cart.add');
+        Route::get('addCart-{id}','UserCartController@addCart')->name('cart.add');
         Route::get('delete-{rowId}','UserCartController@delete')->name('cart.delete');
         Route::post('update','UserCartController@updateCart')->name('cart.update');
     });

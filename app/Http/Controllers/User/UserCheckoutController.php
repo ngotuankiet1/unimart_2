@@ -16,7 +16,43 @@ class UserCheckoutController extends Controller
         return view('user.cart.checkout_login');
     }
 
-    function checkLogout(){
+    function store(Request $request)
+    {
+        $request->validate(
+            [
+                'username' => 'required|max:255|min:3',
+                'password' => 'required',
+            ],
+
+            [
+                'required' => ':attribute không được để trống',
+                'min' => ':attribute có độ dài ít nhất :min ký tự',
+                'max' => ':attribute có độ dài tối ta mã ký tự',
+            ],
+
+            [
+                'username' => 'Email',
+                'password' => 'Mật khẩu',
+            ],
+        );
+
+        $user = Customer::where([
+            ['email', $request->input('username')],
+            ['password', $request->input('password')],
+        ])->first();
+
+        if ($user) {
+            session(['customer_id' => $user->customer_id]);
+            return redirect(route('home'));
+        } else {
+            return redirect(route('cart.checkoutLogin'))->with('info', 'TK OR MK KO CHÍNH XÁC');
+        }
+    }
+
+    function checkLogout(Request $request)
+    {
+        $request->session()->flush();
+        return redirect(route('cart.checkoutLogin'));
     }
 
     function add_customer(Request $request)

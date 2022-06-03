@@ -1,0 +1,25 @@
+nav .pagination{
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    border-radius: 0.25rem;
+}
+
+nav .pagination li a{
+    display: block;
+    padding: 5px 20px;
+    border: 1px solid black;
+}
+
+nav .pagination li span{
+    display: block;
+    padding: 5px 20px;
+    border: 1px solid black;
+    color: red;
+}
+
+nav .pagination :hover{
+    background-color: aqua;
+}
+
+

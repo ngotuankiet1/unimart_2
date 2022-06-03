@@ -66,4 +66,16 @@ class UserProductController extends Controller
         $product_suggestion = Products::where('parent_id', $product->parent_id)->get();
         return view('user.product.detail', compact('list_cat_product', 'product', 'list_product', 'product_suggestion'));
     }
+
+    function search(Request $request){
+        $keyword = "";
+        if($request->input('keyword')){
+            $keyword = $request->input('keyword');
+        }
+        $products = Products::where('name', 'LIKE', "%{$keyword}%")->paginate(3);
+        $list_product =  Products::orderBy('id', 'DESC')->offset(0)->limit(10)->get();
+        $list_cat_product = $this->get_cat_product();
+        return view('user.product.search',compact('list_cat_product','list_product','products'));
+    }
+
 }

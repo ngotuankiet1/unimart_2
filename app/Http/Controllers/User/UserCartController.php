@@ -55,10 +55,11 @@ class UserCartController extends Controller
         }
     }
 
-    function updateCart(Request $request){
+    function updateCart(Request $request)
+    {
         $rowId = $request->input('rowId_cart');
         $qty = $request->input('qty');
-        Cart::update($rowId,$qty);
+        Cart::update($rowId, $qty);
         return redirect(route('cart.show'));
     }
 }

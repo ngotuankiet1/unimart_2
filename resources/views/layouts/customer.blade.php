@@ -44,11 +44,11 @@
                                         $customer_id = Session::get('customer_id');
                                     @endphp
                                     @if ($customer_id != null)
-                                        <a href="{{ route('cart.checkoutLogout') }}" title=""> <i class="fa fa-sign-in"
-                                                aria-hidden="true"></i>Đăng xuất</a>
+                                        <a href="{{ route('cart.checkoutLogout') }}" title=""> <i
+                                                class="fa fa-sign-in" aria-hidden="true"></i>  Đăng xuất</a>
                                     @else
-                                        <a href="{{ route('cart.checkoutLogin') }}" title=""> <i class="fa fa-sign-in"
-                                                aria-hidden="true"></i>Đăng nhập</a>
+                                        <a href="{{ route('cart.checkoutLogin') }}" title=""> <i
+                                                class="fa fa-sign-in" aria-hidden="true"></i>  Đăng nhập</a>
                                     @endif
                                 </li>
                             </ul>
@@ -60,8 +60,9 @@
                         <a href="{{ url('/') }}" title="" id="logo" class="fl-left"><img
                                 src="public/user/images/logo.png" /></a>
                         <div id="search-wp" class="fl-left">
-                            <form method="POST" action="">
-                                <input type="text" name="s" id="s" placeholder="Nhập từ khóa tìm kiếm tại đây!">
+                            <form method="GET" action="{{route('user.search')}}">
+                                @csrf
+                                <input type="text" name="keyword" id="s" placeholder="Nhập từ khóa tìm kiếm tại đây!">
                                 <button type="submit" id="sm-s">Tìm kiếm</button>
                             </form>
                         </div>
@@ -112,9 +113,19 @@
                                     <div class="action-cart clearfix">
                                         <a href="{{ route('cart.show') }}" title="Giỏ hàng"
                                             class="view-cart fl-left">Giỏ hàng</a>
-                                        <a href="{{ route('cart.checkout') }}" title="Thanh toán"
-                                            class="checkout fl-right">Thanh
-                                            toán</a>
+                                        @php
+                                            $customer_id = Session::get('customer_id');
+                                        @endphp
+                                        @if ($customer_id != null)
+                                            <a href="{{ route('cart.checkout') }}" title="Thanh toán"
+                                                class="checkout fl-right">Thanh
+                                                toán</a>
+                                        @else
+                                            <a href="{{ route('cart.checkoutLogin') }}" title="Thanh toán"
+                                                class="checkout fl-right">Thanh
+                                                toán</a>
+                                        @endif
+
                                     </div>
                                 </div>
                             </div>

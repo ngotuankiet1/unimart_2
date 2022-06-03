@@ -4,12 +4,16 @@
     {{ session('id') }}
     <div id="wrapper" class="wp-inner clearfix">
         <div class="login-form">
-            <form action="" id="form-login">
+            <form action="{{ route('user.login') }}" id="form-login" method="POST">
+                @csrf
                 <h1 class="form-heading">Đăng nhập</h1>
                 <div class="form-group">
                     <i class="fa fa-user" aria-hidden="true"></i>
                     <input type="text" name="username" class="form-input" placeholder="Tên đăng nhập">
                 </div>
+                @error('username')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
                 <div class="form-group">
                     <i class="fa fa-key" aria-hidden="true"></i>
                     <input type="password" name="password" class="form-input" placeholder="Mật khẩu">
@@ -17,11 +21,19 @@
                         <i class="fa fa-eye" aria-hidden="true"></i>
                     </div>
                 </div>
+                @error('password')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror <br>
                 <span>
                     <input type="checkbox" class="checkbox">
                     Ghi nhớ mật khẩu
                 </span>
                 <input type="submit" value="Đăng nhập" class="form-submit">
+                @if (session('info'))
+                    <div class="alert alert-success">
+                        {{ session('info') }}
+                    </div>
+                @endif
             </form>
         </div>
         <div class="or">OR</div>

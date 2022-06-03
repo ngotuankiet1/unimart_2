@@ -63,16 +63,22 @@
                 <ul class="list-item">
                     @foreach ($list_product_outstanding as $item)
                         <li>
-                            <a href="{{route('user.detail.product',$item->id)}}" title="" class="thumb">
+                            <a href="{{ route('user.detail.product', $item->id) }}" title="" class="thumb">
                                 <img src="{{ asset($item->images) }}">
                             </a>
-                            <a href="{{route('user.detail.product',$item->id)}}" title="" class="product-name">{{ $item->name }}</a>
+                            <a href="{{ route('user.detail.product', $item->id) }}" title=""
+                                class="product-name">{{ $item->name }}</a>
                             <div class="price">
-                                <span class="new">{{ number_format($item->price,0,0,'.') }}đ</span>
+                                <span class="new">{{ number_format($item->price, 0, 0, '.') }}đ</span>
                                 <span class="old">20.900.000đ</span>
                             </div>
                             <div class="action clearfix">
-                                <a href="{{route("cart.add",$item->id)}}" title="Thêm giỏ hàng" class="add-cart fl-left">Thêm giỏ hàng</a>
+                                <form action="{{ route('cart.add', $item->id) }}">
+                                    @csrf
+                                    <input type="hidden" name="num-order" value="1" id="num-order">
+                                    <button type="submit" title="Thêm giỏ hàng" class="add-cart fl-left">Thêm giỏ
+                                        hàng</button>
+                                </form>
                                 <a href="?page=checkout" title="Mua ngay" class="buy-now fl-right">Mua ngay</a>
                             </div>
                         </li>
@@ -89,16 +95,22 @@
                 <ul class="list-item clearfix">
                     @foreach ($list_product_phone as $item)
                         <li>
-                            <a href="{{route('user.detail.product',$item->id)}}" title="" class="thumb">
+                            <a href="{{ route('user.detail.product', $item->id) }}" title="" class="thumb">
                                 <img src="{{ asset($item->images) }}">
                             </a>
-                            <a href="{{route('user.detail.product',$item->id)}}" title="" class="product-name">{{ $item->name }}</a>
+                            <a href="{{ route('user.detail.product', $item->id) }}" title=""
+                                class="product-name">{{ $item->name }}</a>
                             <div class="price">
-                                <span class="new">{{ number_format($item->price,0,0,'.') }}đ</span>
+                                <span class="new">{{ number_format($item->price, 0, 0, '.') }}đ</span>
                                 <span class="old">20.900.000đ</span>
                             </div>
                             <div class="action clearfix">
-                                <a href="{{route("cart.add",$item->id)}}" title="Thêm giỏ hàng" class="add-cart fl-left">Thêm giỏ hàng</a>
+                                <form action="{{ route('cart.add', $item->id) }}">
+                                    @csrf
+                                    <input type="hidden" name="num-order" value="1" id="num-order">
+                                    <button type="submit" title="Thêm giỏ hàng" class="add-cart fl-left">Thêm giỏ
+                                        hàng</button>
+                                </form>
                                 <a href="?page=checkout" title="Mua ngay" class="buy-now fl-right">Mua ngay</a>
                             </div>
                         </li>
@@ -114,16 +126,22 @@
                 <ul class="list-item clearfix">
                     @foreach ($list_product_laptop as $item)
                         <li>
-                            <a href="{{route('user.detail.product',$item->id)}}" title="" class="thumb">
+                            <a href="{{ route('user.detail.product', $item->id) }}" title="" class="thumb">
                                 <img src="{{ asset($item->images) }}">
                             </a>
-                            <a href="{{route('user.detail.product',$item->id)}}" title="" class="product-name">{{ $item->name }}</a>
+                            <a href="{{ route('user.detail.product', $item->id) }}" title=""
+                                class="product-name">{{ $item->name }}</a>
                             <div class="price">
-                                <span class="new">{{ number_format($item->price,0,0,'.') }}đ</span>
+                                <span class="new">{{ number_format($item->price, 0, 0, '.') }}đ</span>
                                 <span class="old">20.900.000đ</span>
                             </div>
                             <div class="action clearfix">
-                                <a href="{{route("cart.add",$item->id)}}" title="Thêm giỏ hàng" class="add-cart fl-left">Thêm giỏ hàng</a>
+                                <form action="{{ route('cart.add', $item->id) }}">
+                                    @csrf
+                                    <input type="hidden" name="num-order" value="1" id="num-order">
+                                    <button type="submit" title="Thêm giỏ hàng" class="add-cart fl-left">Thêm giỏ
+                                        hàng</button>
+                                </form>
                                 <a href="?page=checkout" title="Mua ngay" class="buy-now fl-right">Mua ngay</a>
                             </div>
                         </li>
