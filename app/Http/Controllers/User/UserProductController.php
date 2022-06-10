@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\User;
+
 use App\Http\Controllers\Controller;
 
 use App\Product_cat;
@@ -28,12 +29,38 @@ class UserProductController extends Controller
                 $productId[] = $item->id;
             }
             $products = Products::whereIn('parent_id', $productId)->latest()->paginate(8);
+
+            if (!empty($request->input('sort'))) {
+                $sort = $request->input('sort');
+                if ($sort == 'a-z') {
+                    $products = Products::whereIn('parent_id', $productId)->orderBy('name')->paginate(8);
+                } else if ($sort == 'z-a') {
+                    $products = Products::whereIn('parent_id', $productId)->orderBy('name', 'DESC')->paginate(8);
+                } else if ($sort == 'high-to-low') {
+                    $products = Products::whereIn('parent_id', $productId)->orderBy('price', 'DESC')->paginate(8);
+                } else {
+                    $products = Products::whereIn('parent_id', $productId)->orderBy('price')->paginate(8);
+                }
+            }
         } else {
             $products = Products::where('parent_id', $id)->paginate(8);
             // $products = DB::table('products')
             //     ->join('product_cats', 'products.parent_id', '=', 'product_cats.id')
             //     ->where('products.parent_id', $id)
             //     ->paginate(8);
+
+            if (!empty($request->input('sort'))) {
+                $sort = $request->input('sort');
+                if ($sort == 'a-z') {
+                    $products = Products::where('parent_id', $id)->orderBy('name')->paginate(8);
+                } else if ($sort == 'z-a') {
+                    $products = Products::where('parent_id', $id)->orderBy('name', 'DESC')->paginate(8);
+                } else if ($sort == 'high-to-low') {
+                    $products = Products::where('parent_id', $id)->orderBy('price', 'DESC')->paginate(8);
+                } else {
+                    $products = Products::where('parent_id', $id)->orderBy('price')->paginate(8);
+                }
+            }
         }
 
         // foreach ($products as $item) {
@@ -67,15 +94,15 @@ class UserProductController extends Controller
         return view('user.product.detail', compact('list_cat_product', 'product', 'list_product', 'product_suggestion'));
     }
 
-    function search(Request $request){
+    function search(Request $request)
+    {
         $keyword = "";
-        if($request->input('keyword')){
+        if ($request->input('keyword')) {
             $keyword = $request->input('keyword');
         }
         $products = Products::where('name', 'LIKE', "%{$keyword}%")->paginate(3);
         $list_product =  Products::orderBy('id', 'DESC')->offset(0)->limit(10)->get();
         $list_cat_product = $this->get_cat_product();
-        return view('user.product.search',compact('list_cat_product','list_product','products'));
+        return view('user.product.search', compact('list_cat_product', 'list_product', 'products'));
     }
-
 }

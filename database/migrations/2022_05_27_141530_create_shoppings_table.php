@@ -14,9 +14,9 @@ class CreateShoppingsTable extends Migration
     public function up()
     {
         Schema::create('shoppings', function (Blueprint $table) {
-            $table->id();
+            $table->increments('shipping_id');
             $table->string('shipping_name');
-            $table->integer('customer_id');
+            // $table->integer('customer_id');
             // $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->string('shipping_email');
             $table->string('shipping_address');

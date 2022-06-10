@@ -62,4 +62,5 @@ class UserCartController extends Controller
         Cart::update($rowId, $qty);
         return redirect(route('cart.show'));
     }
+
 }

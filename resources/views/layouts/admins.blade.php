@@ -91,7 +91,7 @@
             <div id="sidebar" class="bg-white">
                 <ul id="sidebar-menu">
                     <li class="nav-link {{$module_active == 'dashboard'?'active':''}}">
-                        <a href="{{url('dashboard')}}">
+                        <a href="{{url('admin')}}">
                             <div class="nav-link-icon d-inline-flex">
                                 <i class="far fa-folder"></i>
                             </div>
@@ -142,7 +142,7 @@
                         </ul>
                     </li>
                     <li class="nav-link {{$module_active == 'order'?'active':''}}">
-                        <a href="{{url('admin/order/list')}}">
+                        <a href="{{url('admin/order/show')}}">
                             <div class="nav-link-icon d-inline-flex">
                                 <i class="far fa-folder"></i>
                             </div>
@@ -150,7 +150,7 @@
                         </a>
                         <i class="arrow fas fa-angle-right"></i>
                         <ul class="sub-menu">
-                            <li><a href="{{url('admin/order/list')}}">Đơn hàng</a></li>
+                            <li><a href="{{url('admin/order/show')}}">Đơn hàng</a></li>
                         </ul>
                     </li>
                     <li class="nav-link {{$module_active == 'user'?'active':''}}">

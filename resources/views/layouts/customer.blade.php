@@ -45,10 +45,10 @@
                                     @endphp
                                     @if ($customer_id != null)
                                         <a href="{{ route('cart.checkoutLogout') }}" title=""> <i
-                                                class="fa fa-sign-in" aria-hidden="true"></i>  Đăng xuất</a>
+                                                class="fa fa-sign-in" aria-hidden="true"></i> Đăng xuất</a>
                                     @else
                                         <a href="{{ route('cart.checkoutLogin') }}" title=""> <i
-                                                class="fa fa-sign-in" aria-hidden="true"></i>  Đăng nhập</a>
+                                                class="fa fa-sign-in" aria-hidden="true"></i> Đăng nhập</a>
                                     @endif
                                 </li>
                             </ul>
@@ -60,7 +60,7 @@
                         <a href="{{ url('/') }}" title="" id="logo" class="fl-left"><img
                                 src="public/user/images/logo.png" /></a>
                         <div id="search-wp" class="fl-left">
-                            <form method="GET" action="{{route('user.search')}}">
+                            <form method="GET" action="{{ route('user.search') }}">
                                 @csrf
                                 <input type="text" name="keyword" id="s" placeholder="Nhập từ khóa tìm kiếm tại đây!">
                                 <button type="submit" id="sm-s">Tìm kiếm</button>

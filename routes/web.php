@@ -80,6 +80,14 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::get('admin/page/delete/{id}', 'AdminPageController@delete')->name('page.delete');
     Route::get('admin/page/edit/{id}', 'AdminPageController@edit')->name('page.edit');
     Route::post('admin/page/update/{id}', 'AdminPageController@update')->name('page.update');
+    // ==================ORDER===========================
+    #ORDER
+    Route::group(['prefix' => 'admin/order'], function () {
+        Route::get('detail/{id}', 'AdminOrderController@detail')->name('order.detail');
+        Route::get('show', 'AdminOrderController@show')->name('order.show');
+        Route::post('update/{id}', 'AdminOrderController@update_token')->name('order.update.token');
+        Route::get('delete/{id}', 'AdminOrderController@delete')->name('order.delete');
+    });
 });
 
 
@@ -89,21 +97,18 @@ Route::group(['namespace' => 'User'], function () {
     Route::get('tim-kiem.html', 'UserProductController@search')->name('user.search');
     Route::get('chi-tiet-san-pham-{id}.html', 'UserProductController@product_detail')->name('user.detail.product');
 
-    Route::get('checkout','UserCartController@checkout')->name('cart.checkout');
-    Route::get('login','UserCheckoutController@checkoutLogin')->name('cart.checkoutLogin');
-    Route::get('logout','UserCheckoutController@checkLogout')->name('cart.checkoutLogout');
-    Route::post('customer-add','UserCheckoutController@add_customer')->name('user.add');
-    Route::post('customer-login','UserCheckoutController@store')->name('user.login');
+    Route::get('checkout', 'UserCartController@checkout')->name('cart.checkout');
 
+    Route::get('login/user', 'UserCheckoutController@checkoutLogin')->name('cart.checkoutLogin');
+    Route::get('logout', 'UserCheckoutController@checkLogout')->name('cart.checkoutLogout');
+    Route::post('customer-add', 'UserCheckoutController@add_customer')->name('user.add');
+    Route::post('customer-login', 'UserCheckoutController@store')->name('user.login');
+    Route::post('order-place', 'UserCheckoutController@order_place')->name('user.order');
 
     Route::group(['prefix' => 'cart'], function () {
-        Route::get('/','UserCartController@show')->name('cart.show');
-        Route::get('addCart-{id}','UserCartController@addCart')->name('cart.add');
-        Route::get('delete-{rowId}','UserCartController@delete')->name('cart.delete');
-        Route::post('update','UserCartController@updateCart')->name('cart.update');
+        Route::get('/', 'UserCartController@show')->name('cart.show');
+        Route::get('addCart-{id}', 'UserCartController@addCart')->name('cart.add');
+        Route::get('delete-{rowId}', 'UserCartController@delete')->name('cart.delete');
+        Route::post('update', 'UserCartController@updateCart')->name('cart.update');
     });
 });
-
-
-
-

@@ -26,10 +26,10 @@ class LoginController extends Controller
     }
 
     public function logout(Request $request)
-{
-    $this->performLogout($request);
-    return redirect()->route('login');
-}
+    {
+        $this->performLogout($request);
+        return redirect()->route('login');
+    }
 
     /**
      * Where to redirect users after login.
